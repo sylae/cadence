@@ -7,9 +7,8 @@ echo "Updating repository"
 git pull
 git submodule sync
 
-echo "Purging CDN"
+echo "Purging temporary CDN files"
 rm -rfv /tmp/cadence-cdn
-aws s3 rm s3://cdn.calref.net/chat/ --recursive
 
 echo "Configuring cadence"
 
@@ -34,6 +33,6 @@ make install > /dev/null
 
 echo "Deploying CDN"
 
-aws s3 cp /tmp/cadence-cdn s3://cdn.calref.net/chat/ --recursive
+aws s3 sync /tmp/cadence-cdn s3://cdn.calref.net/chat/ --delete
 
 
