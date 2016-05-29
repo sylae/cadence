@@ -1051,8 +1051,8 @@ var xmpp = {
       if (stanza.children('time').attr('xmlns') == Strophe.NS.Cadence_TIME) {
         return this.connection.send(response
           .c('time', {xmlns: 'urn:xmpp:time'})
-          .c('utc', moment().toISOString())
-          .c('tzo', moment().format('Z'))
+          .c('utc', {}, moment().toISOString())
+          .c('tzo', {}, moment().format('Z'))
         ) || true;
       }
 
